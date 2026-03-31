@@ -9,6 +9,8 @@ find_package(OpenSSL REQUIRED)
 set(SHARED_SOURCES
         src/shared/aes.cpp
         src/shared/steg.cpp
+        src/shared/utils.cpp
+        include/utils.hpp
 )
 
 set(SHARED_INCLUDES
@@ -19,7 +21,9 @@ set(SHARED_INCLUDES
 add_executable(GhostRunBuilder
         src/builder/main.cpp
         ${SHARED_SOURCES}
-        src/shared/steg.cpp)
+        src/shared/steg.cpp
+        src/shared/utils.cpp
+        include/utils.hpp)
 
 target_include_directories(GhostRunBuilder PRIVATE ${SHARED_INCLUDES})
 target_link_libraries(GhostRunBuilder PRIVATE OpenSSL::SSL OpenSSL::Crypto)
@@ -29,7 +33,9 @@ target_link_libraries(GhostRunBuilder PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 add_executable(GhostRunRunner
         src/runner/main.cpp
         ${SHARED_SOURCES}
-        src/shared/steg.cpp)
+        src/shared/steg.cpp
+        src/shared/utils.cpp
+        include/utils.hpp)
 
 target_include_directories(GhostRunRunner PRIVATE ${SHARED_INCLUDES})
 target_link_libraries(GhostRunRunner PRIVATE OpenSSL::SSL OpenSSL::Crypto)
