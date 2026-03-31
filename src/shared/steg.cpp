@@ -42,12 +42,15 @@ std::vector<uint8_t> extractData(const char *imagePath)
 	{
 		throw std::runtime_error("failed to load image");
 	}
-	uint32_t dataLen = 0;
+	uint8_t lenBytes[4] = {0};
 	for (int i = 0; i < 32; i++)
 	{
-		dataLen = (dataLen << 1) | (pixels[i] & 1);
+		uint8_t bit = pixels[i] & 1;
+		lenBytes[i / 8] = (lenBytes[i / 8] << 1) | bit;
 	}
-	int totalBytes = 4 + static_cast<int>(dataLen);
+	uint32_t dataLen = 0;
+	std::memcpy(&dataLen, lenBytes, 4);
+	int totalBytes = 32 + static_cast<int>(dataLen);
 	if (totalBytes * 8 > width * height * 3) {
 		stbi_image_free(pixels);
 		throw std::runtime_error("Data size exceeds image capacity");
@@ -59,5 +62,5 @@ std::vector<uint8_t> extractData(const char *imagePath)
 		raw[i / 8] = (raw[i / 8] << 1) | bit; //shifting the raw buffer and 'oring' it to get the bit
 	}
 	stbi_image_free(pixels);
-	return std::vector<uint8_t>(raw.begin() + 4, raw.end());
+	return raw;
 }
