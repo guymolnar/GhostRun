@@ -1,5 +1,4 @@
 #include "aes.hpp"
-
 #include <stdexcept>
 
 encryptedData encryptDataAes(const std::vector<uint8_t>& plaintext, const std::vector<uint8_t>& key)
