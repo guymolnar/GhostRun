@@ -16,19 +16,21 @@ set(SHARED_INCLUDES
         ${CMAKE_SOURCE_DIR}/src/external)
 
 # Builder executable
-add_executable(GhostRun-Builder
+add_executable(GhostRunBuilder
         src/builder/main.cpp
         ${SHARED_SOURCES}
         src/shared/steg.cpp)
 
-target_include_directories(GhostRun-Builder PRIVATE ${SHARED_INCLUDES})
-target_link_libraries(GhostRun-Builder PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+target_include_directories(GhostRunBuilder PRIVATE ${SHARED_INCLUDES})
+target_link_libraries(GhostRunBuilder PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+
 
 # Runner executable
-add_executable(GhostRun-Runner
+add_executable(GhostRunRunner
         src/runner/main.cpp
         ${SHARED_SOURCES}
         src/shared/steg.cpp)
 
-target_include_directories(GhostRun-Runner PRIVATE ${SHARED_INCLUDES})
-target_link_libraries(GhostRun-Runner PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+target_include_directories(GhostRunRunner PRIVATE ${SHARED_INCLUDES})
+target_link_libraries(GhostRunRunner PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+

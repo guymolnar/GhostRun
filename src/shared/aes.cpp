@@ -1,9 +1,9 @@
 #include "aes.hpp"
 #include <stdexcept>
 
-encryptedData encryptDataAes(const std::vector<uint8_t>& plaintext, const std::vector<uint8_t>& key)
+encryptedDataStruct encryptDataAes(const std::vector<uint8_t>& plaintext, const uint8_t* key)
 {
-	encryptedData result;
+	encryptedDataStruct result;
 	result.iv.resize(12);
 	RAND_bytes(result.iv.data(), result.iv.size());
 	result.tag.resize(16);
@@ -12,7 +12,7 @@ encryptedData encryptDataAes(const std::vector<uint8_t>& plaintext, const std::v
 	{
 		throw std::runtime_error("EVP_CIPHER_CTX_new failed");
 	}
-	EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), NULL, key.data(), result.iv.data());
+	EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), NULL, key, result.iv.data());
 
 	result.data.resize(plaintext.size());
 	int len = 0;
@@ -26,7 +26,7 @@ encryptedData encryptDataAes(const std::vector<uint8_t>& plaintext, const std::v
 	return result;
 }
 
-std::vector<uint8_t> aesDecrypt(const std::vector<uint8_t>& key, const encryptedData& encrypted) {
+std::vector<uint8_t> aesDecrypt(const std::vector<uint8_t>& key, const encryptedDataStruct& encrypted) {
 	EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
 	if (!ctx) throw std::runtime_error("Failed to create cipher context");
 

@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(ls -la \"C:\\\\Users\\\\guymo\\\\Documents\\\\GhostRun\\\\src\\\\shared\"\" && ls -la \"C:UsersguymoDocumentsGhostRunsrcbuilder\"\")",
-      "Bash(mv \"C:\\\\Users\\\\guymo\\\\Documents\\\\GhostRun\\\\src\\\\external\\\\stb_image.h\" \"C:\\\\Users\\\\guymo\\\\Documents\\\\GhostRun\\\\src\\\\external\\\\stb_image.h\")",
-      "Bash(mv \"C:\\\\Users\\\\guymo\\\\Documents\\\\GhostRun\\\\src\\\\external\\\\stb_image_write.h\" \"C:\\\\Users\\\\guymo\\\\Documents\\\\GhostRun\\\\src\\\\external\\\\stb_image_write.h\")"
-    ]
-  }
-}
