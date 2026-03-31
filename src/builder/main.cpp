@@ -8,11 +8,13 @@
 
 int main(int argc, char* argv[])
 {
-    //argv[0] = . | argv[1] = data | argv[2] = original photo path | argv[3] = 'evil' photo path
+    //argv[0] = . | argv[1] = data | argv[2] = original photo path | argv[3] = 'evil' photo path | argv[4] = injection?
     std::cout << "GhostRun Builder" << std::endl;
-    if (argc != 4)
+    if (!(argc == 4 || (argc == 5 && strcmp(argv[4], "--inject") == 0)))
     {
-        std::cout << "Wrong Usage! Try: " << argv[0] << " <Data> <OriginalPhotoPath> <NewPhotoPath>" << std::endl;
+        std::cout << "Wrong Usage!" << std::endl << "Try: " << argv[0] << " <Data> <OriginalPhotoPath> <NewPhotoPath> <injectionFlag>" << std::endl;
+        std::cout << "Examples: " << std::endl;
+        std::cout << "./GhostRunBuilder \"this is a secret message\" photo.png evil.png --inject" << std::endl;
         return 1;
     }
     if (!std::filesystem::exists(argv[2]))
@@ -23,10 +25,11 @@ int main(int argc, char* argv[])
     std::vector<uint8_t> data(argv[1], argv[1] + strlen(argv[1])); //Data is being recieved as a c string, cant use argv[1].end()
     const char *originalImagePath = argv[2];
     const char *newImagePath = argv[3];
-
+    const uint8_t injectionFlag = (argc == 5);
     try
     {
         encryptedDataStruct encryptedData = encryptDataAes(data, AES_KEY);
+        encryptedData.injectionFlag = injectionFlag;
         //When embedding the struct into the image, We firstly have to serialize it and turn it into raw bytes (Need a way to represent it as such).
         std::vector<uint8_t> encryptedDataRawBytes = serialize(encryptedData);
 
