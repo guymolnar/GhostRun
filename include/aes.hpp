@@ -4,6 +4,7 @@
 #include <vector>
 
 struct encryptedDataStruct {
+	uint8_t injectionFlag;
 	std::vector<uint8_t> iv;
 	std::vector<uint8_t> tag;
 	std::vector<uint8_t> data;
@@ -17,4 +18,4 @@ const uint8_t AES_KEY[32] = {
 };
 
 encryptedDataStruct encryptDataAes(const std::vector<uint8_t>& plaintext, const uint8_t* key);
-std::vector<uint8_t> aesDecrypt(const std::vector<uint8_t>& key, const encryptedDataStruct& encrypted);
+std::vector<uint8_t> aesDecrypt(const encryptedDataStruct& encrypted, const uint8_t* key);

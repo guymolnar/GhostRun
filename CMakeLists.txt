@@ -11,6 +11,8 @@ set(SHARED_SOURCES
         src/shared/steg.cpp
         src/shared/utils.cpp
         include/utils.hpp
+        src/runner/loader.cpp
+        include/loader.hpp
 )
 
 set(SHARED_INCLUDES
@@ -23,7 +25,9 @@ add_executable(GhostRunBuilder
         ${SHARED_SOURCES}
         src/shared/steg.cpp
         src/shared/utils.cpp
-        include/utils.hpp)
+        include/utils.hpp
+        src/runner/loader.cpp
+        include/loader.hpp)
 
 target_include_directories(GhostRunBuilder PRIVATE ${SHARED_INCLUDES})
 target_link_libraries(GhostRunBuilder PRIVATE OpenSSL::SSL OpenSSL::Crypto)
@@ -35,7 +39,9 @@ add_executable(GhostRunRunner
         ${SHARED_SOURCES}
         src/shared/steg.cpp
         src/shared/utils.cpp
-        include/utils.hpp)
+        include/utils.hpp
+        src/runner/loader.cpp
+        include/loader.hpp)
 
 target_include_directories(GhostRunRunner PRIVATE ${SHARED_INCLUDES})
 target_link_libraries(GhostRunRunner PRIVATE OpenSSL::SSL OpenSSL::Crypto)

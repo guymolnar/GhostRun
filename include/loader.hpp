@@ -1,8 +1,5 @@
-//
-// Created by guymo on 3/31/2026.
-//
+#pragma once
+#include <cstdint>
+#include <windows.h>
 
-#ifndef GHOSTRUN_LOADER_HPP
-#define GHOSTRUN_LOADER_HPP
-
-#endif //GHOSTRUN_LOADER_HPP
+void inject(const uint8_t* shellcode);

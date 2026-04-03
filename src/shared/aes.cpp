@@ -26,11 +26,11 @@ encryptedDataStruct encryptDataAes(const std::vector<uint8_t>& plaintext, const 
 	return result;
 }
 
-std::vector<uint8_t> aesDecrypt(const std::vector<uint8_t>& key, const encryptedDataStruct& encrypted) {
+std::vector<uint8_t> aesDecrypt( const encryptedDataStruct& encrypted, const uint8_t* key) {
 	EVP_CIPHER_CTX* ctx = EVP_CIPHER_CTX_new();
 	if (!ctx) throw std::runtime_error("Failed to create cipher context");
 
-	EVP_DecryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, key.data(), encrypted.iv.data());
+	EVP_DecryptInit_ex(ctx, EVP_aes_256_gcm(), nullptr, key, encrypted.iv.data());
 
 	std::vector<uint8_t> plaintext(encrypted.data.size());
 	int len = 0;
