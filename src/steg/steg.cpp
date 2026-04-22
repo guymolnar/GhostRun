@@ -3,7 +3,7 @@
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#include "steg.hpp"
+#include <steg/steg.hpp>
 
 #include <stdexcept>
 
@@ -50,7 +50,7 @@ std::vector<uint8_t> extractData(const char *imagePath)
 	}
 	uint32_t dataLen = 0;
 	std::memcpy(&dataLen, lenBytes, 4);
-	int totalBytes = 33 + static_cast<int>(dataLen);
+	int totalBytes = 32 + static_cast<int>(dataLen);
 	if (totalBytes * 8 > width * height * 3) {
 		stbi_image_free(pixels);
 		throw std::runtime_error("Data size exceeds image capacity");

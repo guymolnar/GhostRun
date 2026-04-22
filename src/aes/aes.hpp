@@ -4,7 +4,6 @@
 #include <vector>
 
 struct encryptedDataStruct {
-	uint8_t injectionFlag;
 	std::vector<uint8_t> iv;
 	std::vector<uint8_t> tag;
 	std::vector<uint8_t> data;
